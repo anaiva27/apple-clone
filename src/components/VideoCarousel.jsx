@@ -3,7 +3,7 @@ import { hightlightsSlides } from "../constants";
 import { pauseImg, playImg, replayImg } from "../utils";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollTrigger } from "gsap/all";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const VideoCarousel = () => {
@@ -55,7 +55,6 @@ const VideoCarousel = () => {
 		let currentProgress = 0;
 		let span = videoSpanRef.current;
 		if (span[videoId]) {
-			//animate progress of the video
 			let anim = gsap.to(span[videoId], {
 				onUpdate: () => {
 					const progress = Math.ceil(anim.progress() * 100);
@@ -130,7 +129,7 @@ const VideoCarousel = () => {
 					<div
 						key={list.id}
 						id="slider"
-						className="sm:pr-20 pr-10"
+						className="sm:pr-20 pr-30"
 					>
 						<div className="video-carousel_container">
 							<div className="w-full h-full flex-center rounded-3xl overflow-hidden bg-black">
@@ -138,7 +137,6 @@ const VideoCarousel = () => {
 									id="video"
 									playsInline={true}
 									preload="auto"
-									autoPlay
 									muted
 									className={`${
 										list.id === 2 && "translate-x-44"
