@@ -3,6 +3,8 @@ import { hightlightsSlides } from "../constants";
 import { pauseImg, playImg, replayImg } from "../utils";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const VideoCarousel = () => {
 	const videoRef = useRef([]);
@@ -80,14 +82,6 @@ const VideoCarousel = () => {
 						});
 						gsap.to(span[videoId], { backgroundColor: "#afafaf" });
 					}
-					// else {
-					// 	gsap.to(videoDivRef.current[videoId], {
-					// 		width: 1,
-					// 	});
-					// 	gsap.to(videoSpanRef.current[videoId], {
-					// 		width: 1,
-					// 	});
-					//}
 				},
 			});
 			if (videoId === 0) {
@@ -119,7 +113,7 @@ const VideoCarousel = () => {
 				setVideo((prev) => ({ ...prev, isLastVideo: false, videoId: 0 }));
 				break;
 			case "video-play":
-				setVideo((prev) => ({ ...prev, isPlaying: !prev.isPlaying }));
+				setVideo((prev) => ({ ...prev, isPlaying: true }));
 				break;
 			case "video-pause":
 				setVideo((prev) => ({ ...prev, isPlaying: false }));
@@ -146,6 +140,9 @@ const VideoCarousel = () => {
 									preload="auto"
 									autoPlay
 									muted
+									className={`${
+										list.id === 2 && "translate-x-44"
+									} pointer-events-none`}
 									ref={(el) => (videoRef.current[i] = el)}
 									onPlay={() =>
 										setVideo((prev) => ({ ...prev, isPlaying: true }))
